@@ -1,0 +1,117 @@
+public class StudentManager {
+
+    // Method to insert a new student
+    public static void addStudent(String name, String studentId, String email, String course) {
+        Student__c s = new Student__c();
+        s.Name = name;
+        s.Student_ID__c = studentId;
+        s.Email__c = email;
+        s.Course__c = course;
+        s.Enrollment_Date__c = Date.today();
+        insert s;
+    }
+
+    // Method to retrieve all students
+    public static List<Student__c> getAllStudents() {
+        return [SELECT Name, Student_ID__c, Email__c, Course__c, Enrollment_Date__c FROM Student__c];
+    }
+}
+
+
+
+
+StudentManager.addStudent('Yash Sharma', 'ST123', 'yash@example.com', 'DevOps');
+
+
+
+
+public class StudentController {
+    public List<Student__c> students { get; set; }
+    public Student__c newStudent { get; set; }
+
+    public StudentController() {
+        newStudent = new Student__c();
+        loadStudents();
+    }
+
+    public void loadStudents() {
+        students = [SELECT Name, Student_ID__c, Email__c, Course__c, Enrollment_Date__c FROM Student__c];
+    }
+
+    public PageReference saveStudent() {
+        insert newStudent;
+        newStudent = new Student__c();
+        loadStudents();
+        return null;
+    }
+}
+
+
+
+
+
+<apex:page controller="StudentController">
+    <h1>Student Management</h1>
+
+    <apex:form>
+        <apex:pageBlock title="Add New Student">
+            <apex:pageBlockSection>
+                <apex:inputField value="{!newStudent.Name}" label="Name"/>
+                <apex:inputField value="{!newStudent.Student_ID__c}" label="Student ID"/>
+                <apex:inputField value="{!newStudent.Email__c}" label="Email"/>
+                <apex:inputField value="{!newStudent.Course__c}" label="Course"/>
+                <apex:inputField value="{!newStudent.Enrollment_Date__c}" label="Enrollment Date"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons>
+                <apex:commandButton action="{!saveStudent}" value="Save"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="All Students">
+            <apex:pageBlockTable value="{!students}" var="s">
+                <apex:column value="{!s.Name}"/>
+                <apex:column value="{!s.Student_ID__c}"/>
+                <apex:column value="{!s.Email__c}"/>
+                <apex:column value="{!s.Course__c}"/>
+                <apex:column value="{!s.Enrollment_Date__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+https://orgfarm-3a523f45f6-dev-ed.develop.lightning.force.com/lightning/n/Student_UI
+
+
+
+Username sudhanshuwankhade143941@agentforce.com
+Pass Sudu@123
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+object create
+field and relatiomship+ new
+search tab and add 
+appmanager search karun new lightining app 
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+https://github.com/Vishwajeet-Londhe/SPPU-CSE-SEM6-Codes
+
+
+
+
+
+
